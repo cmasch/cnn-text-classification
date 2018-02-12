@@ -73,7 +73,7 @@ def build_cnn(embedding_layer=None, num_words=None,
     if dropout_rate:
         x = Dropout(dropout_rate)(x)
     x = Activation('relu')(x)
-    x = Dense(2, activation='softmax')(x)
+    x = Dense(1, activation='sigmoid')(x)
     
     return Model(inputs=x_in, outputs=x)
     
