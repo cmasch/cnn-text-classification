@@ -38,6 +38,18 @@ For all runs I used a learning rate reduction if their's no improvement on valid
 | [3,4,5] | [10,10,10] | GloVe 300 | 15000 / 200 | 200 / 40 | 0.1733 / 0.9407 | 0.1724 / 0.9418 | 0.1793 / 0.9393 |
 | [3,4,5] | [10,10,10] | 300 | 15000 / 200 | 200 / 40 | 0.1251 / 0.9583 | 0.1647 / 0.9424 | 0.1753 / 0.9384 |
 
+### Yelp 2017 - Multiclass classification
+All previous evaluations are typical binary classification tasks. The Yelp dataset comes with reviews which can be classified into five classes (one to five stars). For the evaluations above I merged one and two star reviews together to the negative class. Reviews with four and five stars are labeled as positive reviews. Neutral reviews with three stars are not considered. In this evaluation I trained the model on all five classes.
+The baseline we have to reach is 20% accuracy because all classes are balanced to the same amount of samples. In a first evaluation I reached 60% accuracy. This sounds a little bit low but you have to keep in mind that in the binary classification we have a baseline of 50% accuracy. That is more than twice as much! Furthermore there is a lot subjectivity in the reviews. Take a look on the confusion matrix:
+
+<img src="./images/yelp_confusion.png">
+
+If you look carefully you can see that it’s hard to distinguish in one class that has surrounding classes side by side. If you wrote a negative review, when does this have just two stars and not one or three?! Sometimes it’s clear for sure but sometimes not! Therefore I calculated another result with an approach of smooth transition (+-1) for each class. If we do so, we get an accuracy of 94.71% which is similar to binary classification but not very valid.
+
+| Filter Sizes | Feature Maps | Embedding | Max Words / Sequence | Batch Size /<br>Epochs | Training<br>(loss / acc) | Validation<br>(loss / acc) | Test<br>(loss / acc) |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :--: |
+| [3,4,5] | [10,10,10] | 300 | 15000 / 200 | 200 / 50 | 0.8613 / 0.6395 | 0.9036 / 0.6179 | 0.9356 / 0.6051 |
+
 ## Conclusion and improvements
 Finally CNNs are a great approach for text classification. However a lot of data is needed for training a good model. It would be interesting to compare this results with a typical machine learning approach. I expect that using ML for all datasets except Yelp getting similar results. If you evaluate your own architecture (neural network), I recommend using IMDB or Yelp because of their amount of data.<br>
 
@@ -66,15 +78,12 @@ If you have any questions or hints for improvement contact me through an issue. 
 * TensorFlow 1.1
 * Scikit 0.19.1
 
-
 ## Usage
 Feel free to use the [model](https://github.com/cmasch/cnn-text-classification/blob/master/cnn_model.py) and your own dataset. As an example you can use this [evaluation notebook](https://github.com/cmasch/cnn-text-classification/blob/master/Evaluation.ipynb).
 
 ## References
 [1] [Convolutional Neural Networks for Sentence Classification](https://arxiv.org/abs/1408.5882)<br>
 [2] [Neural Document Embeddings for Intensive Care Patient Mortality Prediction](https://arxiv.org/abs/1612.00467)
-
- 
 
 ## Author
 Christopher Masch
