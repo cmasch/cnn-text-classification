@@ -8,14 +8,14 @@ I used the following sets for evaluation:
 - [sentence polarity dataset v1.0](http://www.cs.cornell.edu/people/pabo/movie-review-data/)<br>
 The polarity dataset v1.0 has 10662 sentences. It's quit similiar to traditional sentiment analysis of tweets because of the content length. I just splitted the data in train / validation (90% / 10%).
 - [IMDB moview review](http://ai.stanford.edu/~amaas/data/sentiment/)<br>
-IMDB moview review has 25000 train and 25000 test documents. I used train / validation like the one above but with a final test.
+IMDB moview review has 25000 train and 25000 test documents. I splitted the trainset into train / validation (80% / 20%) and used the testset for a final test.
 - [Yelp dataset 2017](https://www.yelp.com/dataset)<br>
 This dataset contains a JSON of nearly 5 million entries. I splitted this JSON for performance reason to randomly 200000 train and 50000 test documents. I selected ratings with 1-2 stars as negative and 4-5 as positive. Ratings with 3 stars are not considered because of their neutrality. In addition comes that this selected subset contains only texts with more than 5 words. The language of the texts include english, german, spanish and a lot more. During the training I used 80% / 20% (train / validation). If you are interested you can also check a small demo of the [embeddings](https://github.com/cmasch/word-embeddings-from-scratch) created from the training data.
 
 ## Model
 The implemented [model](https://github.com/cmasch/cnn-text-classification/blob/master/cnn_model.py) has multiple convolutional layers in parallel to obtain several features of one text. Through different kernel sizes of each convolution layer the window size varies and the text will be read with a n-gram approach. The default values are 3 convolution layers with kernel size of 3, 4 and 5.<br>
 
-I also used pre-trained embedding [GloVe](https://nlp.stanford.edu/projects/glove/) with 300 dimensional vectors to show that unsupervised learning of words can have a positive effect on neural nets.
+I also used pre-trained embedding [GloVe](https://nlp.stanford.edu/projects/glove/) with 300 dimensional vectors and 6B tokens to show that unsupervised learning of words can have a positive effect on neural nets.
 
 ## Results
 For all runs I used a learning rate reduction if their's no improvement on validation loss by factor 0.1 after 4 epochs. The optimizer for all runs was Adadelta.<br>As already described I used 5 runs to get a final mean of loss / accuracy.
