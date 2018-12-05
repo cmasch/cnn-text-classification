@@ -50,8 +50,8 @@ For all runs I used filter sizes of [3,4,5], Adam as optimizer, batch size of 10
 ### Sentence polarity dataset v1.0
 | Feature Maps | Embedding | Max Words / Sequence | Hidden Units | Dropout | Training<br>(loss / acc) | Validation<br>(loss / acc) |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| [100,100,100] | GloVe 300 | 15000 / 20 | 64 | 0.4 | 0.3134 / 0.8642 | 0.4058 / 0.8135 |
-| [100,100,100] | 300 | 15000 / 20 | 64 | 0.4 | 0.4741 / 0.7753 | 0.4563 / 0.7807 |
+| [100,100,100] | GloVe 300 | 15000 / 35 | 64 | 0.4 | 0.3134 / 0.8642 | 0.4058 / 0.8135 |
+| [100,100,100] | 300 | 15000 / 35 | 64 | 0.4 | 0.4741 / 0.7753 | 0.4563 / 0.7807 |
 
 ### IMDB
 | Feature Maps | Embedding | Max Words / Sequence | Hidden Units | Dropout | Training<br>(loss / acc) | Validation<br>(loss / acc) | Test<br>(loss / acc) |
