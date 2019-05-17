@@ -1,6 +1,21 @@
 # Text classification with Convolution Neural Networks (CNN)
 This is a project to classify text documents / sentences with CNNs. You can find a great introduction in a similar approach on a blog entry of [Denny Britz](http://www.wildml.com/2015/12/implementing-a-cnn-for-text-classification-in-tensorflow/) and [Keras](https://blog.keras.io/using-pre-trained-word-embeddings-in-a-keras-model.html). My approach is quit similar to the one of Denny and the original paper of Yoon Kim [1]. You can find the implementation of Yoon Kim on [GitHub](https://github.com/yoonkim/CNN_sentence) as well.
 
+## *** UPDATE *** - May 17th, 2019: Changes in version 0.1.0
+
+Model:
+- Combine word-level with character-based input. The char input ist optional and can be used for further reasearch.
+- Change padding of conv-layer from same to valid.
+- Add average pooling after conv-layer and combine it with existing max pooling.
+
+Notebook:
+- Add CHAR support
+- Commented out preprocessing
+- Add scikit-learn example at the end for comparison between deep learning and machine learning.
+
+Using characters in addition to words ends up with no improvement but can be a good starting point for further research.
+I keep the model as simple as possible and reuse the existing methods for character input. As written in the paper of Yann LeCun [3] using several conv-layers on each over could improve performance.
+
 ## *** UPDATE *** - December 3rd, 2018: Changes in version 0.0.2
 - Implemented the model as a class (cnn_model.CNN)
 - Replaced max pooling by global max pooling
@@ -99,7 +114,7 @@ If you have any questions or hints for improvement contact me through an issue. 
 ## Requirements
 * Python 3.6
 * Keras 2.2.4
-* TensorFlow 1.10.0
+* TensorFlow 1.x
 * Scikit 0.20.0
 
 ## Usage
@@ -107,7 +122,8 @@ Feel free to use the [model](https://github.com/cmasch/cnn-text-classification/b
 
 ## References
 [1] [Convolutional Neural Networks for Sentence Classification](https://arxiv.org/abs/1408.5882)<br>
-[2] [Neural Document Embeddings for Intensive Care Patient Mortality Prediction](https://arxiv.org/abs/1612.00467)
+[2] [Neural Document Embeddings for Intensive Care Patient Mortality Prediction](https://arxiv.org/abs/1612.00467)<br>
+[3] [Character-level Convolutional Networks for Text Classification](https://arxiv.org/abs/1509.01626)
 
 ## Author
 Christopher Masch
