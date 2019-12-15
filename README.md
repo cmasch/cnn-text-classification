@@ -1,6 +1,12 @@
 # Text classification with Convolution Neural Networks (CNN)
 This is a project to classify text documents / sentences with CNNs. You can find a great introduction in a similar approach on a blog entry of [Denny Britz](http://www.wildml.com/2015/12/implementing-a-cnn-for-text-classification-in-tensorflow/) and [Keras](https://blog.keras.io/using-pre-trained-word-embeddings-in-a-keras-model.html). My approach is quit similar to the one of Denny and the original paper of Yoon Kim [1]. You can find the implementation of Yoon Kim on [GitHub](https://github.com/yoonkim/CNN_sentence) as well.
 
+## *** UPDATE *** - December 15th, 2019: Changes in version 0.2.0
+I’ve updated the code to TensorFlow 2.
+Besides I made some changes in the jupyter notebook:
+- Remove Yelp dataset
+- Add TensorFlow Dataset for IMDB
+
 ## *** UPDATE *** - May 17th, 2019: Changes in version 0.1.0
 
 Model:
@@ -112,10 +118,10 @@ I'm sure that you can get better results by tuning some parameters:
 If you have any questions or hints for improvement contact me through an issue. Thanks!
 
 ## Requirements
-* Python 3.6
-* Keras 2.2.4
-* TensorFlow 1.x
-* Scikit 0.20.0
+* Python 3.x
+* TensorFlow 2.x
+* TensorFlow-Datasets
+* Scikit
 
 ## Usage
 Feel free to use the [model](https://github.com/cmasch/cnn-text-classification/blob/master/cnn_model.py) and your own dataset. As an example you can use this [evaluation notebook](https://github.com/cmasch/cnn-text-classification/blob/master/Evaluation.ipynb).

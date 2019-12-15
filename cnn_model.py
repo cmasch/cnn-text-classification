@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-CNN model for text classification implemented in TensorFlow / Keras.
+CNN model for text classification implemented in TensorFlow 2.
 This implementation is based on the original paper of Yoon Kim [1] for classification using words.
 Besides I add charachter level input [2].
 
@@ -11,12 +11,12 @@ Besides I add charachter level input [2].
 @author: Christopher Masch
 """
 
-import keras
-from keras import layers
+import tensorflow as tf
+from tensorflow.keras import layers
 
 
 class CNN:
-    __version__ = '0.1.0'
+    __version__ = '0.2.0'
 
     def __init__(self, embedding_layer=None, num_words=None, embedding_dim=None,
                  max_seq_length=100, kernel_sizes=[3, 4, 5], feature_maps=[100, 100, 100],
@@ -42,9 +42,9 @@ class CNN:
         self.embedding_layer = embedding_layer
         self.num_words = num_words
         self.max_seq_length = max_seq_length
-        self.embedding_dim = embedding_dim
-        self.kernel_sizes = kernel_sizes
-        self.feature_maps = feature_maps
+        self.embedding_dim  = embedding_dim
+        self.kernel_sizes   = kernel_sizes
+        self.feature_maps   = feature_maps
         # CHAR-level
         self.use_char = use_char
         self.char_max_length = char_max_length
@@ -54,14 +54,14 @@ class CNN:
         # General
         self.hidden_units = hidden_units
         self.dropout_rate = dropout_rate
-        self.nb_classes = nb_classes
+        self.nb_classes   = nb_classes
 
     def build_model(self):
         """
         Build the model
 
         Returns:
-            Model           : Keras model instance
+            Model : Keras model instance
         """
 
         # Checks
@@ -91,6 +91,7 @@ class CNN:
         x = layers.Activation('relu')(x)
         prediction = layers.Dense(self.nb_classes, activation='softmax')(x)
 
+        
         # CHAR-level
         if self.use_char:
             char_input = layers.Input(shape=(self.char_max_length,), dtype='int32', name='char_input')
@@ -105,9 +106,9 @@ class CNN:
             x_char = layers.Dense(self.nb_classes, activation='softmax')(x_char)
 
             prediction = layers.Average()([prediction, x_char])
-            return keras.Model(inputs=[word_input, char_input], outputs=prediction, name='CNN_Word_Char')
+            return tf.keras.Model(inputs=[word_input, char_input], outputs=prediction, name='CNN_Word_Char')
 
-        return keras.Model(inputs=word_input, outputs=prediction, name='CNN_Word')
+        return tf.keras.Model(inputs=word_input, outputs=prediction, name='CNN_Word')
 
     def building_block(self, input_layer, kernel_sizes, feature_maps):
         """
@@ -148,9 +149,9 @@ class CNN:
 
         x1 = layers.GlobalMaxPooling1D()(x)
         x2 = layers.GlobalAveragePooling1D()(x)
-        x = layers.concatenate([x1, x2])
+        x  = layers.concatenate([x1, x2])
 
-        x = layers.Dense(self.hidden_units)(x)
+        x  = layers.Dense(self.hidden_units)(x)
         if self.dropout_rate:
             x = layers.Dropout(self.dropout_rate)(x)
         return x
