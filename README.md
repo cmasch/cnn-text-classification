@@ -1,13 +1,22 @@
 # Text classification with Convolution Neural Networks (CNN)
-This is a project to classify text documents / sentences with CNNs. You can find a great introduction in a similar approach on a blog entry of [Denny Britz](http://www.wildml.com/2015/12/implementing-a-cnn-for-text-classification-in-tensorflow/) and [Keras](https://blog.keras.io/using-pre-trained-word-embeddings-in-a-keras-model.html). My approach is quit similar to the one of Denny and the original paper of Yoon Kim [1]. You can find the implementation of Yoon Kim on [GitHub](https://github.com/yoonkim/CNN_sentence) as well.
+This project demonstrates how to classify text documents / sentences with CNNs. You can find a great introduction in a similar approach on a blog entry of [Denny Britz](http://www.wildml.com/2015/12/implementing-a-cnn-for-text-classification-in-tensorflow/) and [Keras](https://blog.keras.io/using-pre-trained-word-embeddings-in-a-keras-model.html). My approach is quit similar to the one of Denny and the original paper of Yoon Kim [1]. You can find the implementation of Yoon Kim on [GitHub](https://github.com/yoonkim/CNN_sentence) as well.
 
-## *** UPDATE *** - December 15th, 2019: Changes in version 0.2.0
+## Changes
+
+### *** UPDATE *** - September 10th, 2021
+In this update I fixed some typos as well as improved the jupyter notebook. You can execute the notebook without any requirements. Required data will be downloaded automatically.
+
+- Add Yelp Polarity Dataset (Tensorflow-Dataset)
+- Add utils.py for moving code out of notebook
+- Add blank char in `ALPHABET` variable
+
+### *** UPDATE *** - December 15th, 2019
 I’ve updated the code to TensorFlow 2.
 Besides I made some changes in the jupyter notebook:
 - Remove Yelp dataset
 - Add TensorFlow Dataset for IMDB
 
-## *** UPDATE *** - May 17th, 2019: Changes in version 0.1.0
+### *** UPDATE *** - May 17th, 2019
 
 Model:
 - Combine word-level with character-based input. The char input ist optional and can be used for further reasearch.
@@ -22,7 +31,7 @@ Notebook:
 Using characters in addition to words ends up with no improvement but can be a good starting point for further research.
 I keep the model as simple as possible and reuse the existing methods for character input. As written in the paper of Yann LeCun [3] using several conv-layers on each over could improve performance.
 
-## *** UPDATE *** - December 3rd, 2018: Changes in version 0.0.2
+### *** UPDATE *** - December 3rd, 2018
 - Implemented the model as a class (cnn_model.CNN)
 - Replaced max pooling by global max pooling
 - Replaced conv1d by separable convolutions
@@ -79,6 +88,13 @@ For all runs I used filter sizes of [3,4,5], Adam as optimizer, batch size of 10
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | [200,200,200] | GloVe 300 | 15000 / 500 | 200 | 0.4 | 0.1735 / 0.9332 | 0.2417 / 0.9064 | 0.2509 / 0.9007 |
 | [200,200,200] | 300 | 15000 / 500 | 200 | 0.4 | 0.2425 / 0.9037 | 0.2554 / 0.8964 | 0.2632 / 0.8920 |
+
+### Yelp Polarity Dataset (2015)
+| Feature Maps | Embedding | Max Words / Sequence | Hidden Units | Dropout | Training<br>(loss / acc) | Validation<br>(loss / acc) | Test<br>(loss / acc) |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| [200,200,200] | GloVe 300 | 15000 / 200 | 250 | 0.5 | 0.1066 / 0.9602 | 0.1146 / 0.9567 | 0.1130 / 0.9574 |
+| [200,200,200] | 300 | 15000 / 200 | 250 | 0.5 | 0.1029 / 0.9617 | 0.1243 / 0.9533 | 0.1219 / 0.9547 |
+| ML-Model | - | - | - | - | - | - / 0.9398 | - / 0.9398 |
 
 ### Yelp 2017
 | Feature Maps | Embedding | Max Words / Sequence | Hidden Units | Dropout | Training<br>(loss / acc) | Validation<br>(loss / acc) | Test<br>(loss / acc) |
